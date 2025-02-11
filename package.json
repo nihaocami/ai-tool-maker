@@ -1,0 +1,35 @@
+{
+  "name": "toolsmith",
+  "version": "1.0.0",
+  "description": "Generate Vercel AI SDK tools from a OpenAPI swagger document.",
+  "main": "index.js",
+  "bin": {
+    "toolsmith": "./dist/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "ai sdk",
+    "vercel",
+    "nodejs",
+    "nextjs",
+    "llm",
+    "ai",
+    "ai tools"
+  ],
+  "author": "nihaocami",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "openapi-typescript-codegen": "^0.29.0",
+    "ts-to-zod": "^3.15.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3"
+  }
+}
