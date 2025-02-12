@@ -1,5 +1,5 @@
 {
-  "name": "toolsmith",
+  "name": "toolsmithai",
   "version": "1.0.0",
   "description": "Generate Vercel AI SDK tools from a OpenAPI swagger document.",
   "main": "index.js",
