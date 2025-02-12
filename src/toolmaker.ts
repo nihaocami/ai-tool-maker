@@ -8,6 +8,9 @@ export const makeTools = (sdkSource: string) => {
   console.log("⏳ Generating tools");
   const outputDir = path.join(sdkSource, "..", "tools");
   const sdkPath = path.join(sdkSource, "sdk.gen.ts");
+  const relativeSDKPath = path
+    .relative(outputDir, sdkSource)
+    .replaceAll("\\", "/");
 
   // Ensure output directory exists
   if (!fs.existsSync(outputDir)) {
@@ -20,9 +23,7 @@ export const makeTools = (sdkSource: string) => {
     }),
   });
 
-  const zodText = getZodSchemasFile(
-    `${path.relative(outputDir, sdkSource).replaceAll("\\", "/")}`
-  );
+  const zodText = getZodSchemasFile(`${relativeSDKPath}`);
 
   fs.writeFileSync(zodSchemaOutput, zodText);
   // Read source file
@@ -107,7 +108,7 @@ export const makeTools = (sdkSource: string) => {
     const fileContent = `
 import { tool } from "ai";
 import { ${schemaName} } from "./ts.schema.ts";
-import { ${name}, ${mainArgType} } from "../api";
+import { ${name}, ${mainArgType} } from "${relativeSDKPath}";
 
 export default tool({
   description: \`
