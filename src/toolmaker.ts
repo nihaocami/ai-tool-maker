@@ -2,12 +2,7 @@ import fs from "fs";
 import path from "path";
 import { generate } from "ts-to-zod";
 import ts from "typescript";
-import { fileURLToPath } from "url";
 import { splitIntoMultilineString, pascalToCamel } from "./strings.js";
-
-// Get __dirname equivalent in ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const makeTools = (sdkSource: string) => {
   console.log("⏳ Generating tools");
@@ -26,7 +21,7 @@ export const makeTools = (sdkSource: string) => {
   });
 
   const zodText = getZodSchemasFile(
-    `../${path.relative(__dirname, sdkSource)}`
+    `${path.relative(outputDir, sdkSource).replaceAll("\\", "/")}`
   );
 
   fs.writeFileSync(zodSchemaOutput, zodText);
