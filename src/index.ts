@@ -5,13 +5,10 @@ import * as fs from "fs";
 import * as path from "path";
 import { createClient } from "@hey-api/openapi-ts";
 import { makeTools } from "./toolmaker.js";
-import pkg from "../package.json" assert { type: "json" };
 const program = new Command();
 
 program
-  .name(pkg.name)
-  .description(pkg.description)
-  .version(pkg.version)
+  .name("ai-tool-maker")
   .argument("<destination>", "Path to the output directory")
   .argument("<openapiSpec>", "Path to the OpenAPI spec (json) file")
   .action(async (destination, openapiSpec) => {
