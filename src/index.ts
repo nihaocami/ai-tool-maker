@@ -5,19 +5,19 @@ import * as fs from "fs";
 import * as path from "path";
 import { createClient } from "@hey-api/openapi-ts";
 import { makeTools } from "./toolmaker.js";
-
+import pkg from "../package.json" assert { type: "json" };
 const program = new Command();
 
 program
-  .name("toolsmith")
-  .description("Generate an Axios client from a Swagger file")
-  .version("1.0.0")
+  .name(pkg.name)
+  .description(pkg.description)
+  .version(pkg.version)
   .argument("<destination>", "Path to the output directory")
-  .argument("<swaggerFile>", "Path to the Swagger file")
-  .action(async (destination, swaggerFile) => {
+  .argument("<openapiSpec>", "Path to the OpenAPI spec (json) file")
+  .action(async (destination, openapiSpec) => {
     try {
       const sdkOutputDir = path.resolve(destination);
-      const openAPISpecDir = path.resolve(swaggerFile);
+      const openAPISpecDir = path.resolve(openapiSpec);
 
       if (!fs.existsSync(openAPISpecDir)) {
         console.error(`Error: Swagger file not found at ${openAPISpecDir}`);

@@ -1,7 +1,7 @@
 {
-  "name": "toolsmithai",
+  "name": "ai-tool-maker",
   "version": "1.0.1",
-  "description": "Generate Vercel AI SDK tools from a OpenAPI swagger document.",
+  "description": "Generate Vercel AI SDK tools from a OpenAPI specs document.",
   "main": "index.js",
   "bin": {
     "toolsmith": "./dist/index.js"
