@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { generate } from "openapi-typescript-codegen";
-import path from "path";
-import fs from "fs";
-import t2z from "ts-to-zod";
+import * as fs from "fs";
+import * as path from "path";
+import { createClient } from "@hey-api/openapi-ts";
+import { makeTools } from "./toolmaker.js";
 
 const program = new Command();
 
@@ -16,22 +16,23 @@ program
   .argument("<swaggerFile>", "Path to the Swagger file")
   .action(async (destination, swaggerFile) => {
     try {
-      const outputDir = path.resolve(destination);
-      const swaggerPath = path.resolve(swaggerFile);
+      const sdkOutputDir = path.resolve(destination);
+      const openAPISpecDir = path.resolve(swaggerFile);
 
-      if (!fs.existsSync(swaggerPath)) {
-        console.error(`Error: Swagger file not found at ${swaggerPath}`);
+      if (!fs.existsSync(openAPISpecDir)) {
+        console.error(`Error: Swagger file not found at ${openAPISpecDir}`);
         process.exit(1);
       }
 
-      await generate({
-        input: swaggerPath,
-        output: outputDir,
-        httpClient: "axios",
+      await createClient({
+        input: openAPISpecDir,
+        output: sdkOutputDir,
+        plugins: ["@hey-api/client-axios"],
       });
-      console.log(`✅ Axios client generated in ${outputDir}`);
+
+      makeTools(sdkOutputDir);
     } catch (err) {
-      console.error("❌ Error generating client:", err);
+      console.log(err);
       process.exit(1);
     }
   });
