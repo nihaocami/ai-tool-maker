@@ -11,7 +11,8 @@ program
   .name("AI Tool Maker")
   .argument("<destination>", "Path to the output directory")
   .argument("<openapiSpec>", "Path to the OpenAPI spec (json) file")
-  .action(async (destination, openapiSpec) => {
+  .option("-c, --config <config>", "Path to your openapi-ts.config.ts")
+  .action(async (destination, openapiSpec, options) => {
     try {
       const sdkOutputDir = path.resolve(destination);
       const openAPISpecDir = path.resolve(openapiSpec);
@@ -24,7 +25,12 @@ program
       await createClient({
         input: openAPISpecDir,
         output: sdkOutputDir,
-        plugins: ["@hey-api/client-axios"],
+        plugins: [
+          {
+            runtimeConfigPath: options.config,
+            name: "@hey-api/client-axios",
+          },
+        ],
       });
 
       makeTools(sdkOutputDir);
