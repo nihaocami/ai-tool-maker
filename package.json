@@ -1,10 +1,10 @@
 {
-  "name": "ai-tool-maker",
-  "version": "1.0.3",
+  "name": "aitm",
+  "version": "1.0.4",
   "description": "Generate Vercel AI SDK tools from a OpenAPI specs.",
   "main": "index.js",
   "bin": {
-    "ai-tool-maker": "./dist/index.js"
+    "aitm": "./dist/index.js"
   },
   "type": "module",
   "scripts": {

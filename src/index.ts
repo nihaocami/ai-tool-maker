@@ -8,7 +8,7 @@ import { makeTools } from "./toolmaker.js";
 const program = new Command();
 
 program
-  .name("ai-tool-maker")
+  .name("AI Tool Maker")
   .argument("<destination>", "Path to the output directory")
   .argument("<openapiSpec>", "Path to the OpenAPI spec (json) file")
   .action(async (destination, openapiSpec) => {
