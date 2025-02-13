@@ -6,7 +6,7 @@ import { splitIntoMultilineString, pascalToCamel } from "./strings.js";
 
 export const makeTools = (sdkSource: string) => {
   console.log("⏳ Generating tools");
-  const outputDir = path.join(sdkSource, "..", "tools");
+  const outputDir = path.join(sdkSource, "tools");
   const sdkPath = path.join(sdkSource, "sdk.gen.ts");
   const relativeSDKPath = path
     .relative(outputDir, sdkSource)
@@ -23,7 +23,7 @@ export const makeTools = (sdkSource: string) => {
     }),
   });
 
-  const zodText = getZodSchemasFile(`${relativeSDKPath}`);
+  const zodText = getZodSchemasFile(relativeSDKPath);
 
   fs.writeFileSync(zodSchemaOutput, zodText);
   // Read source file

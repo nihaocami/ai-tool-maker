@@ -1,10 +1,10 @@
 {
   "name": "ai-tool-maker",
-  "version": "1.0.2",
-  "description": "Generate Vercel AI SDK tools from a OpenAPI specs document.",
+  "version": "1.0.3",
+  "description": "Generate Vercel AI SDK tools from a OpenAPI specs.",
   "main": "index.js",
   "bin": {
-    "toolsmith": "./dist/index.js"
+    "ai-tool-maker": "./dist/index.js"
   },
   "type": "module",
   "scripts": {
