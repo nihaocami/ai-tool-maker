@@ -16,7 +16,7 @@ export const makeTools = (sdkSource: string) => {
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir);
   }
-  const zodSchemaOutput = path.join(outputDir, "ts.schema.ts");
+  const zodSchemaOutput = path.join(outputDir, "aitm.schema.ts");
   const { getZodSchemasFile } = generate({
     sourceText: fs.readFileSync(path.join(sdkSource, "types.gen.ts"), {
       encoding: "utf-8",
@@ -107,7 +107,7 @@ export const makeTools = (sdkSource: string) => {
     // Write file with imports
     const fileContent = `
 import { tool } from "ai";
-import { ${schemaName} } from "./ts.schema.ts";
+import { ${schemaName} } from "./aitm.schema.ts";
 import { ${name}, ${mainArgType} } from "${relativeSDKPath}";
 
 export default tool({

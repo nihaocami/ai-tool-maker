@@ -1,6 +1,6 @@
 {
   "name": "aitm",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generate Vercel AI SDK tools from a OpenAPI specs.",
   "main": "index.js",
   "bin": {
@@ -12,6 +12,11 @@
     "prepare": "npm run build",
     "dev": "npm run build && node dist/index.js dist/api spec3.json"
   },
+  "homepage": "https://github.com/nihaocami/ai-tool-maker",
+  "repository": {
+    "url": "https://github.com/nihaocami/ai-tool-maker",
+    "type": "git+https://github.com/nihaocami/ai-tool-maker.git"
+  },
   "keywords": [
     "ai sdk",
     "vercel",
@@ -19,7 +24,19 @@
     "nextjs",
     "llm",
     "ai",
-    "ai tools"
+    "ai tools",
+    "generator",
+    "http",
+    "javascript",
+    "json",
+    "next",
+    "next.js",
+    "node",
+    "nuxt",
+    "openapi",
+    "rest",
+    "swagger",
+    "typescript"
   ],
   "author": "nihaocami",
   "license": "ISC",
