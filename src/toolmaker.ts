@@ -23,7 +23,10 @@ export const makeTools = (sdkSource: string) => {
     }),
   });
 
-  const zodText = getZodSchemasFile(relativeSDKPath);
+  const zodText = getZodSchemasFile(relativeSDKPath).replaceAll(
+    /^\s*\burl\b\s*:\s*[^;]?/gm,
+    ""
+  );
 
   fs.writeFileSync(zodSchemaOutput, zodText);
   // Read source file
