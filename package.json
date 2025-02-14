@@ -1,6 +1,6 @@
 {
   "name": "aitm",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Generate Vercel AI SDK tools from a OpenAPI specs.",
   "main": "index.js",
   "bin": {
