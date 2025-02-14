@@ -1,6 +1,10 @@
-# ✦ AI Tool Maker (beta)
+# ✦ AI Tool Maker <span style="font-size:12px">(beta)</span>
 
 Turn any OpenAPI spec into AI tools that plug right into your Vercel AI SDK apps.
+
+# Beta
+
+This project is in early development, however you should be able to generate tools from any OpenAPI spec. If you find an issue, please open a PR.
 
 ## Usage
 
