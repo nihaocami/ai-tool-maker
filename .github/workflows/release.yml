@@ -1,9 +1,9 @@
-name: Publish to npm
+name: Publish to npm on Version Change
 
 on:
   push:
     branches:
-      - ci
+      - main
 
 jobs:
   publish:
@@ -12,21 +12,43 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Fetch the previous commit as well
+
+      - name: Get previous version
+        id: prev_version
+        run: |
+          PREV_VERSION=$(git show HEAD~1:package.json | jq -r .version)
+          echo "previous_version=$PREV_VERSION" >> $GITHUB_ENV
+
+      - name: Get current version
+        id: curr_version
+        run: |
+          CURR_VERSION=$(jq -r .version package.json)
+          echo "current_version=$CURR_VERSION" >> $GITHUB_ENV
+
+      - name: Check if version changed
+        id: version_check
+        run: |
+          if [ "$previous_version" != "$current_version" ]; then
+            echo "version_changed=true" >> $GITHUB_ENV
+          else
+            echo "version_changed=false" >> $GITHUB_ENV
+          fi
 
       - name: Set up Node.js
+        if: env.version_changed == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: "18"
           registry-url: "https://registry.npmjs.org/"
-          always-auth: true
 
       - name: Install dependencies
+        if: env.version_changed == 'true'
         run: npm ci
 
-      - name: Build package
-        run: npm run build
-
       - name: Publish to npm
+        if: env.version_changed == 'true'
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
