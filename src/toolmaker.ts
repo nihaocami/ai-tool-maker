@@ -23,10 +23,9 @@ export const makeTools = (sdkSource: string) => {
     }),
   });
 
-  const zodText = getZodSchemasFile(relativeSDKPath).replaceAll(
-    /^\s*\burl\b\s*:\s*[^;]?/gm,
-    ""
-  );
+  const zodText = getZodSchemasFile(relativeSDKPath)
+    .replace(/^\s*url:\s*z\.[a-zA-Z0-9]+\(.*?\),?\n?/gm, "")
+    .replace(/,\s*url:\s*z\.[a-zA-Z0-9]+\(.*?\)/g, "");
 
   fs.writeFileSync(zodSchemaOutput, zodText);
   // Read source file
@@ -119,7 +118,13 @@ export default tool({
     \`,
   parameters: ${schemaName},
   execute: async (args : ${mainArgType} ) => {
-    return await ${name}(args);
+    try {
+      const { data } = await ${name}(args);
+      return data;
+    } catch (e: unknown) {
+      console.log(e);
+      return "no results";
+    }
   },
 });
     `;

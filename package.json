@@ -1,6 +1,6 @@
 {
   "name": "aitm",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Generate Vercel AI SDK tools from a OpenAPI specs.",
   "main": "index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
-    "dev": "npm run build && node dist/index.js dist/api spec3.json -c ./src/aitm.config.ts"
+    "test": "npm run build && node dist/index.js test/api-client ./test/openapi.json -c ./src/aitm.config.ts"
   },
   "homepage": "https://github.com/nihaocami/ai-tool-maker",
   "repository": {
