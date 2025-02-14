@@ -23,9 +23,7 @@ export const makeTools = (sdkSource: string) => {
     }),
   });
 
-  const zodText = getZodSchemasFile(relativeSDKPath)
-    .replace(/^\s*url:\s*z\.[a-zA-Z0-9]+\(.*?\),?\n?/gm, "")
-    .replace(/,\s*url:\s*z\.[a-zA-Z0-9]+\(.*?\)/g, "");
+  const zodText = getZodSchemasFile(relativeSDKPath);
 
   fs.writeFileSync(zodSchemaOutput, zodText);
   // Read source file
@@ -116,7 +114,7 @@ export default tool({
   description: \`
   ${splitIntoMultilineString(jsDocComment ?? name)}
     \`,
-  parameters: ${schemaName},
+  parameters: ${schemaName}.omit({ url: true }),
   execute: async (args : Omit<${mainArgType}, "url"> ) => {
     try {
       const { data } = await ${name}(args);
