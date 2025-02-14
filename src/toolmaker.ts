@@ -117,7 +117,7 @@ export default tool({
   ${splitIntoMultilineString(jsDocComment ?? name)}
     \`,
   parameters: ${schemaName},
-  execute: async (args : ${mainArgType} ) => {
+  execute: async (args : Omit<${mainArgType}, "url"> ) => {
     try {
       const { data } = await ${name}(args);
       return data;
